@@ -3,30 +3,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using RubeGoldbergFunction.Infrastructure.Repositories;
 using RubeGoldbergFunction.Core.Entities;
+using RubeGoldbergFunction.Core.Utils;
 
 namespace RubeGoldbergFunction.Infrastructure.Repositories
 {
-    public class InMemoryNoteRepository
+    public class InMemoryNoteRepository : IDisposable
     {
         private List<Note> _noteCollection;
+        private int _itemId = 0;
 
         public InMemoryNoteRepository()
         {
             _noteCollection = new();
-            this.fillWithSampleData();
+            this.FillWithSampleData();
         }
 
-
-        private void fillWithSampleData()
+        public void Dispose()
         {
-            _noteCollection.Add(new Note());
+            _noteCollection.Clear();
+        }
+
+        private String AllocateNextId()
+        {
+            return (_itemId++).ToString();
+        }
+
+        private void FillWithSampleData()
+        {
+            Note newNote = NoteUtils.BuildRandomNote();
+
+            Create(newNote);
         }
 
         public IList<Note> FindAll()
         {
             return _noteCollection;
+        }
+
+        public Note FindById(String id)
+        {
+            Note note = _noteCollection.First(note => note.Id == id);
+
+            return note;
+        }
+
+        public Note Create(Note newNote)
+        {
+            newNote.Id = AllocateNextId();
+
+            newNote.CreatedAt = DateTime.Now;
+            newNote.UpdatedAt = DateTime.Now;
+            newNote.Trace.Add("New Note persisted to database");
+
+            _noteCollection.Add(newNote);
+
+            return newNote;
         }
     }
 }

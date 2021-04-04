@@ -9,7 +9,7 @@ namespace RubeGoldbergFunction.Core.Utils
 {
     public class NoteUtils
     {
-        public static Note buildRandomNote()
+        public static Note BuildRandomNote()
         {
             Note newNote = new();
 

@@ -18,5 +18,9 @@ namespace RubeGoldbergFunction.Core.Entities
         public String Body { get; set; }
         public String CorrelationId { get; set; }
         public List<String> Trace { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
