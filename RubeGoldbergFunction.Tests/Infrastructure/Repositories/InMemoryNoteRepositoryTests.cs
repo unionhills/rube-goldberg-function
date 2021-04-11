@@ -32,7 +32,7 @@ namespace RubeGoldbergFunction.Tests.Infrastructure.Repositories
         [Fact]
         public void GetAllNotesTest()
         {
-            IList<Note> noteList = _noteRepo.FindAll();
+            ICollection<Note> noteList = _noteRepo.FindAll();
 
             Assert.NotNull(noteList);
             Assert.NotEmpty(noteList);
@@ -50,7 +50,7 @@ namespace RubeGoldbergFunction.Tests.Infrastructure.Repositories
         [Fact]
         public void CreateNewNoteTest()
         {
-            IList<Note> noteList = _noteRepo.FindAll();
+            ICollection<Note> noteList = _noteRepo.FindAll();
             int recordCount = noteList.Count;
 
             Note newNote = AddNewRandomNote();

@@ -10,12 +10,12 @@ namespace RubeGoldbergFunction.Infrastructure.Repositories
 {
     public class InMemoryNoteRepository : IDisposable
     {
-        private List<Note> _noteCollection;
+        private IList<Note> _noteCollection;
         private int _itemId = 0;
 
         public InMemoryNoteRepository()
         {
-            _noteCollection = new();
+            _noteCollection = new List<Note>();
             this.FillWithSampleData();
         }
 
@@ -36,7 +36,7 @@ namespace RubeGoldbergFunction.Infrastructure.Repositories
             Create(newNote);
         }
 
-        public IList<Note> FindAll()
+        public ICollection<Note> FindAll()
         {
             return _noteCollection;
         }
