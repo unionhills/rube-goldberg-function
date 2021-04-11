@@ -8,7 +8,7 @@ using RubeGoldbergFunction.Core.Utils;
 
 namespace RubeGoldbergFunction.Infrastructure.Repositories
 {
-    public class InMemoryNoteRepository : IDisposable
+    public class InMemoryNoteRepository : IRepository<Note>
     {
         private IList<Note> _noteCollection;
         private int _itemId = 0;
@@ -41,9 +41,9 @@ namespace RubeGoldbergFunction.Infrastructure.Repositories
             return _noteCollection;
         }
 
-        public Note FindById(String id)
+        public Note FindById(object id)
         {
-            Note note = _noteCollection.First(note => note.Id == id);
+            Note note = _noteCollection.First(note => note.Id == id.ToString());
 
             return note;
         }

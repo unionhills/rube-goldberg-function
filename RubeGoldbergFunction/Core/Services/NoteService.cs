@@ -8,30 +8,30 @@ using RubeGoldbergFunction.Infrastructure.Repositories;
 
 namespace RubeGoldbergFunction.Core.Services
 {
-    public class NoteService
+    public class NoteService : INoteService
     {
-        private readonly InMemoryNoteRepository noteRepo;
+        private readonly IRepository<Note> _noteRepo;
 
-        public NoteService()
+        public NoteService(IRepository<Note> noteRepo)
         {
-            noteRepo = new();
+            _noteRepo = noteRepo;
         }
 
         public ICollection<Note> GetNotes()
         {
-            return noteRepo.FindAll();
+            return _noteRepo.FindAll();
         }
 
         public Note CreateNote(Note newNote)
         {
-            Note createdNote = noteRepo.Create(newNote);
+            Note createdNote = _noteRepo.Create(newNote);
 
             return createdNote;
         }
 
         public Note GetNote(String id)
         {
-            return noteRepo.FindById(id);
+            return _noteRepo.FindById(id);
         }
     }
 

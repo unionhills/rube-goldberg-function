@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using RubeGoldbergFunction.Core.Entities;
 using RubeGoldbergFunction.Core.Services;
 using RubeGoldbergFunction.Core.Utils;
+using RubeGoldbergFunction.Infrastructure.Repositories;
 
 namespace RubeGoldbergFunction.Tests.Core.Services
 {
@@ -15,7 +16,7 @@ namespace RubeGoldbergFunction.Tests.Core.Services
 
         public NoteServiceTests()
         {
-            _noteService = new();
+            _noteService = new(new InMemoryNoteRepository());
         }
 
         [Fact]

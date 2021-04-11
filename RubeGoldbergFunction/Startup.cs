@@ -12,6 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using RubeGoldbergFunction.Core.Entities;
+using RubeGoldbergFunction.Core.Services;
+using RubeGoldbergFunction.Infrastructure.Repositories;
+
 namespace RubeGoldbergFunction
 {
     public class Startup
@@ -26,6 +30,8 @@ namespace RubeGoldbergFunction
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<INoteService, NoteService>();
+            services.AddScoped<IRepository<Note>, InMemoryNoteRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

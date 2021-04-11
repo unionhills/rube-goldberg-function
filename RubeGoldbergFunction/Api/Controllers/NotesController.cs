@@ -14,12 +14,12 @@ namespace RubeGoldbergFunction.Api.Controllers
     public class NotesController : ControllerBase
     {
         private readonly ILogger<NotesController> _logger;
-        private readonly NoteService _noteService;
+        private readonly INoteService _noteService;
 
-        public NotesController(ILogger<NotesController> logger)
+        public NotesController(ILogger<NotesController> logger, INoteService noteService)
         {
             _logger = logger;
-            _noteService = new();
+            _noteService = noteService;
         }
 
         [HttpGet]
